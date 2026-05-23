@@ -1,0 +1,13 @@
+﻿using System;
+
+namespace Lab1
+{
+    class Program
+    {
+        public static void Main(string[] args)
+        {
+            System.Console.WriteLine("Hi Gaurav!" + args[0] + " " + args[1]);
+            Console.Read();
+        }
+    } 
+}

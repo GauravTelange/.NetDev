@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="FileSearch/FileSearch.csproj" />
+  <Project Path="FileSearchUI/FileSearchUI.csproj" Id="65030e90-657b-4584-88a9-31eb274a007d" />
+  <Project Path="Simple_File_Search_Project/Simple_File_Search_Project.csproj" />
+</Solution>

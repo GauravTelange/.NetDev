@@ -1,0 +1,11 @@
+C:\Users\Admin\source\repos\Simple_File_Search_Project\FileSearch\obj\Debug\net10.0\FileSearch.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Admin\source\repos\Simple_File_Search_Project\FileSearch\obj\Debug\net10.0\FileSearch.AssemblyInfoInputs.cache
+C:\Users\Admin\source\repos\Simple_File_Search_Project\FileSearch\obj\Debug\net10.0\FileSearch.AssemblyInfo.cs
+C:\Users\Admin\source\repos\Simple_File_Search_Project\FileSearch\obj\Debug\net10.0\FileSearch.csproj.CoreCompileInputs.cache
+C:\Users\Admin\source\repos\Simple_File_Search_Project\FileSearch\bin\Debug\net10.0\FileSearch.deps.json
+C:\Users\Admin\source\repos\Simple_File_Search_Project\FileSearch\bin\Debug\net10.0\FileSearch.dll
+C:\Users\Admin\source\repos\Simple_File_Search_Project\FileSearch\bin\Debug\net10.0\FileSearch.pdb
+C:\Users\Admin\source\repos\Simple_File_Search_Project\FileSearch\obj\Debug\net10.0\FileSearch.dll
+C:\Users\Admin\source\repos\Simple_File_Search_Project\FileSearch\obj\Debug\net10.0\refint\FileSearch.dll
+C:\Users\Admin\source\repos\Simple_File_Search_Project\FileSearch\obj\Debug\net10.0\FileSearch.pdb
+C:\Users\Admin\source\repos\Simple_File_Search_Project\FileSearch\obj\Debug\net10.0\ref\FileSearch.dll
