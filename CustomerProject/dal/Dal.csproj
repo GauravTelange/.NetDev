@@ -4,5 +4,9 @@
 		<ImplicitUsings>disable</ImplicitUsings>
 		<Nullable>disable</Nullable>
 		<LangVersion>latest</LangVersion>
+		<UseWindowsForms>true</UseWindowsForms>
 	</PropertyGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\BusinessLogicCustomer\BusinessLogicCustomer.csproj" />
+	</ItemGroup>
 </Project>

@@ -1,5 +1,8 @@
 <Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".gitignore" />
+  </Folder>
   <Project Path="BusinessLogicCustomer/BusinessLogicCustomer.csproj" />
   <Project Path="CustomerProject/CustomerProject.csproj" />
-  <Project Path="CustomerUIForSuperUsers/CustomerUIForSuperUsers.csproj" />
+  <Project Path="dal/Dal.csproj" />
 </Solution>

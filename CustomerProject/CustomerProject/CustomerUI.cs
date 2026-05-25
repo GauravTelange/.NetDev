@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using BusinessLogicCustomer;
+using Dal;
 
 namespace CustomerProject
 {
@@ -57,8 +58,17 @@ namespace CustomerProject
                 custobj.PhoneNumber = txtPhoneNumber.Text;
                 custobj.ProductName = txtProduct.Text;
                 custobj.BillAmount = Convert.ToDecimal(txtBillAmount.Text);
-                custobj.Validate();
+
+
+                // Validate throws exceptions on failure; it does not return a boolean
+                if (custobj.Validate())
+                {
+                    CustomerDal dal = new CustomerDal();
+                    dal.Add(custobj);
+                }
             }
+
+               
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
