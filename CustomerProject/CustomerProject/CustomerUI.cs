@@ -60,7 +60,7 @@ namespace CustomerProject
                 custobj.BillAmount = Convert.ToDecimal(txtBillAmount.Text);
 
 
-                // Validate throws exceptions on failure; it does not return a boolean
+                
                 if (custobj.Validate())
                 {
                     CustomerDal dal = new CustomerDal();
@@ -73,6 +73,23 @@ namespace CustomerProject
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void loadGrid()
+        {
+            CustomerDal dal = new CustomerDal();
+            DataSet customers = dal.Read();
+            dataGridView1.DataSource = customers.Tables[0];
+        }
+
+        private void CustomerUI_Load(object sender, EventArgs e)
+        {
+            loadGrid();
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            
         }
     }
 }

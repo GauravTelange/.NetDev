@@ -3,6 +3,6 @@
     <File Path=".gitignore" />
   </Folder>
   <Project Path="BusinessLogicCustomer/BusinessLogicCustomer.csproj" />
-  <Project Path="CustomerProject/CustomerProject.csproj" />
+  <Project Path="CustomerProject/CustomerProject.csproj" Id="631b1f66-578d-45c8-8ccc-800b4c00a479" />
   <Project Path="dal/Dal.csproj" />
 </Solution>

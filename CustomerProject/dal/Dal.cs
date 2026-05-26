@@ -41,5 +41,31 @@ namespace Dal
             }
 
         }
+
+        public DataSet Read()
+        {
+            
+                string constr = @"Data Source=localhost\SQLEXPRESS;Initial Catalog=Customerdb;Integrated Security=True;TrustServerCertificate=True";
+
+
+                SqlConnection conn = new SqlConnection(constr);
+                conn.Open();
+
+
+                SqlCommand command = new SqlCommand();
+                command.Connection = conn;
+
+                command.CommandText = "Select CustomerId,CustomerName,BillAmount from tblCustomer";
+
+                SqlDataAdapter adapter = new SqlDataAdapter(command);
+                DataSet customers = new DataSet();
+                adapter.Fill(customers);
+
+                conn.Close();
+                return customers;
+                
+            
+            
+        }
     }
 }
