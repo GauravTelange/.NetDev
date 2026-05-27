@@ -27,8 +27,9 @@ namespace Dal
                     command.Parameters.AddWithValue("@phone", obj.PhoneNumber);
                     command.Parameters.AddWithValue("@product", obj.ProductName);
                     command.Parameters.AddWithValue("@amount", obj.BillAmount);
-
+                    MessageBox.Show("Customer Added successfully.");
                     command.ExecuteNonQuery();
+
                 }
 
                 conn.Close();
@@ -55,7 +56,7 @@ namespace Dal
                 SqlCommand command = new SqlCommand();
                 command.Connection = conn;
 
-                command.CommandText = "Select CustomerId,CustomerName,BillAmount from tblCustomer";
+                command.CommandText = "Select CustomerId,CustomerName,PhoneNumber,ProductName,BillAmount from tblCustomer";
 
                 SqlDataAdapter adapter = new SqlDataAdapter(command);
                 DataSet customers = new DataSet();
@@ -66,6 +67,73 @@ namespace Dal
                 
             
             
+        }
+
+
+        public bool Update(Customer obj,int  Customerid)
+        {
+            try
+            {
+                string constr = @"Data Source=localhost\SQLEXPRESS;Initial Catalog=Customerdb;Integrated Security=True;TrustServerCertificate=True";
+
+
+                SqlConnection conn = new SqlConnection(constr);
+                conn.Open();
+
+                string sql = "UPDATE tblCustomer SET CustomerName = @name, PhoneNumber = @phone, ProductName = @product, BillAmount = @amount " +
+                             "WHERE CustomerId = @id";
+
+                using (SqlCommand command = new SqlCommand(sql, conn))
+                {
+                    command.Parameters.AddWithValue("@name", obj.CustomerName);
+                    command.Parameters.AddWithValue("@phone", obj.PhoneNumber);
+                    command.Parameters.AddWithValue("@product", obj.ProductName);
+                    command.Parameters.AddWithValue("@amount", obj.BillAmount);
+                    command.Parameters.AddWithValue("@id", Customerid);
+
+                    command.ExecuteNonQuery();
+                }
+
+                conn.Close();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return false;
+            }
+
+        }
+
+        public bool Delete(int CustomerId)
+        {
+            try
+            {
+                string constr = @"Data Source=localhost\SQLEXPRESS;Initial Catalog=Customerdb;Integrated Security=True;TrustServerCertificate=True";
+
+
+                SqlConnection conn = new SqlConnection(constr);
+                conn.Open();
+
+                string sql = "Delete from tblCustomer "+
+                             "WHERE CustomerId = @id";
+
+                using (SqlCommand command = new SqlCommand(sql, conn))
+                {
+                   
+                    command.Parameters.AddWithValue("@id", CustomerId);
+                    MessageBox.Show("Customer deleted successfully.");
+                    command.ExecuteNonQuery();
+                }
+
+                conn.Close();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return false;
+            }
         }
     }
 }

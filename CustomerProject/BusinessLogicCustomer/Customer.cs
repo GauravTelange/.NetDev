@@ -10,6 +10,7 @@ namespace BusinessLogicCustomer
         public decimal BillAmount { get; set; }
 
         public Customer() {
+            
             CustomerName = "";
             PhoneNumber = "";
             ProductName = "";
