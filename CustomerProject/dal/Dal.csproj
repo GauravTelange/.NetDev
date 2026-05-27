@@ -9,4 +9,7 @@
 	<ItemGroup>
 	  <ProjectReference Include="..\BusinessLogicCustomer\BusinessLogicCustomer.csproj" />
 	</ItemGroup>
+	<ItemGroup>
+	  <Reference Include="System.Configuration" />
+	</ItemGroup>
 </Project>

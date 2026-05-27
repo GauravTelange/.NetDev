@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -84,6 +85,11 @@ namespace CustomerProject
 
         private void CustomerUI_Load_1(object sender, EventArgs e)
         {
+            this.Text = ConfigurationManager.AppSettings["NameoftheApplication"].ToString();
+            button1.Text = ConfigurationManager.AppSettings["AddButton"].ToString();
+            btnUpdate.Text = ConfigurationManager.AppSettings["UpdateButton"].ToString();
+            btnDelete.Text = ConfigurationManager.AppSettings["DeleteButton"].ToString();
+
             loadGrid();
         }
 

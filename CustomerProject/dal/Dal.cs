@@ -8,15 +8,22 @@ namespace Dal
 {
     public class CustomerDal
     {
+        public SqlConnection CreateConnection()
+        {
+             string constr = System.Configuration.ConfigurationManager.ConnectionStrings["DbConn"].ConnectionString;
+              
+             SqlConnection conn = new SqlConnection(constr);
+          
+             conn.Open();
+             
+             return conn;
+        }
         public bool Add(Customer obj)
         {
             try
             {
-                string constr = @"Data Source=localhost\SQLEXPRESS;Initial Catalog=Customerdb;Integrated Security=True;TrustServerCertificate=True";
-
-                
-                SqlConnection conn = new SqlConnection(constr); 
-                conn.Open();
+                SqlConnection conn =  CreateConnection();
+               
 
                 string sql = "INSERT INTO tblCustomer (CustomerName, PhoneNumber, ProductName, BillAmount) " +
                              "VALUES (@name, @phone, @product, @amount)";
@@ -27,9 +34,9 @@ namespace Dal
                     command.Parameters.AddWithValue("@phone", obj.PhoneNumber);
                     command.Parameters.AddWithValue("@product", obj.ProductName);
                     command.Parameters.AddWithValue("@amount", obj.BillAmount);
-                    MessageBox.Show("Customer Added successfully.");
+                   
                     command.ExecuteNonQuery();
-
+                    MessageBox.Show("Customer Added successfully.");
                 }
 
                 conn.Close();
@@ -74,11 +81,7 @@ namespace Dal
         {
             try
             {
-                string constr = @"Data Source=localhost\SQLEXPRESS;Initial Catalog=Customerdb;Integrated Security=True;TrustServerCertificate=True";
-
-
-                SqlConnection conn = new SqlConnection(constr);
-                conn.Open();
+                SqlConnection conn = CreateConnection();
 
                 string sql = "UPDATE tblCustomer SET CustomerName = @name, PhoneNumber = @phone, ProductName = @product, BillAmount = @amount " +
                              "WHERE CustomerId = @id";
@@ -109,11 +112,7 @@ namespace Dal
         {
             try
             {
-                string constr = @"Data Source=localhost\SQLEXPRESS;Initial Catalog=Customerdb;Integrated Security=True;TrustServerCertificate=True";
-
-
-                SqlConnection conn = new SqlConnection(constr);
-                conn.Open();
+                SqlConnection conn = CreateConnection();
 
                 string sql = "Delete from tblCustomer "+
                              "WHERE CustomerId = @id";
