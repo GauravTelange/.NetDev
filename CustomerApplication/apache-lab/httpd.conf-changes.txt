@@ -1,0 +1,18 @@
+Paste / verify these in C:\Apache24\conf\httpd.conf (what your sir edits in EditPlus)
+================================================================================
+
+Line ~37:
+  ServerRoot "c:/Apache24"
+
+Line ~60 (Listen section):
+  Listen 80
+  (or Listen 8080 if port 80 is busy)
+
+Uncomment (~150-180 area, exact line numbers vary by version):
+  LoadModule proxy_module modules/mod_proxy.so
+  LoadModule proxy_http_module modules/mod_proxy_http.so
+
+At END of file:
+  Include conf/extra/customerapp-proxy.conf
+
+Then copy customerapp-proxy.conf to C:\Apache24\conf\extra\
