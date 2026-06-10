@@ -4,6 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using HelloWorld.Models;
+using HelloWorld.Dal;
+using HelloWorld.ViewModel;
+using System.Threading;
 
 namespace HelloWorld.Controllers
 {
@@ -14,11 +17,13 @@ namespace HelloWorld.Controllers
             HttpContextBase obj = controllerContext.HttpContext;
             string custCode = obj.Request.Form["CustomerCode"];
             string custName = obj.Request.Form["CustomerName"];
+            string custAmount = obj.Request.Form["CustomerAmount"];
 
             Customer customer = new Customer
             {
                 CustomerCode = custCode, 
                 CustomerName = custName,
+                CustomerAmount = Convert.ToDecimal(custAmount)
             };
 
             return customer;
@@ -39,12 +44,75 @@ namespace HelloWorld.Controllers
         }
         public ActionResult Enter()
         {
-            return View("EnterCustomer");
-        }
-        public ActionResult Submit( [ModelBinder( typeof(CustomerBinder))] Customer obj)
-        {
+            CustomerViewModel obj = new CustomerViewModel();
+            obj.customer = new Customer();
 
-            return View("Customer",obj);
+            //CustomerDal dal = new CustomerDal();
+            //List<Customer> customerscoll  = dal.Customers.ToList<Customer>();
+            //obj.customers = customerscoll;
+            //Thread.Sleep(10000);
+            return View("EnterCustomer",obj);
+        }
+
+        public ActionResult EnterSearch()
+        {
+            CustomerViewModel obj = new CustomerViewModel();
+            obj.customers = new List<Customer>();
+            return View("SearchCustomer", obj);
+        }
+
+        public ActionResult SearchCustomer()
+        {
+            CustomerViewModel obj = new CustomerViewModel();
+
+            string customerName = Request.Form["txtCustomerName"];
+
+            CustomerDal dal = new CustomerDal();
+
+            obj.customers = dal.Customers
+                               .Where(x => x.CustomerName == customerName)
+                               .ToList();
+
+            return View("SearchCustomer", obj);
+        }
+
+        public ActionResult GetCustomers()
+        {
+            CustomerDal dal = new CustomerDal();
+            List<Customer> customerscoll = dal.Customers.ToList<Customer>();
+            //Thread.Sleep(10000);
+            return Json(customerscoll, JsonRequestBehavior.AllowGet);
+        }
+        [ActionName("GetCustomersByName")]
+        public ActionResult GetCustomers(Customer obj)
+        {
+            CustomerDal dal = new CustomerDal();
+            List<Customer> customerscoll = (from c in dal.Customers
+                                        where c.CustomerName == obj.CustomerName
+                                        select c).ToList<Customer>();
+            //Thread.Sleep(10000);
+            return Json(customerscoll, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult Submit(Customer obj)
+        {
+           
+
+            if (ModelState.IsValid)
+            {
+                CustomerDal Dal = new CustomerDal();
+                Dal.Customers.Add(obj);
+                Dal.SaveChanges();
+               //vm.customer = new Customer();
+            }
+            
+            CustomerDal dal = new CustomerDal();
+            List<Customer> customerscoll = dal.Customers.ToList<Customer>();
+            
+
+            return Json(customerscoll, JsonRequestBehavior.AllowGet);
+
         }
     }
 }
