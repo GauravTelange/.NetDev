@@ -17,11 +17,11 @@ namespace HelloWorld.Controllers
             HttpContextBase obj = controllerContext.HttpContext;
             string custCode = obj.Request.Form["CustomerCode"];
             string custName = obj.Request.Form["CustomerName"];
-            string custAmount = obj.Request.Form["CustomerAmount"];
+            string custAmount =         obj.Request.Form["CustomerAmount"];
 
             Customer customer = new Customer
             {
-                CustomerCode = custCode, 
+                CustomerCode = custCode,
                 CustomerName = custName,
                 CustomerAmount = Convert.ToDecimal(custAmount)
             };
@@ -30,36 +30,42 @@ namespace HelloWorld.Controllers
 
         }
     }
-    public class CustomerController : Controller
+    public class CustomerUIController : Controller
     {
         // GET: Customer
-        public ActionResult Load()
-        {
-            Customer obj = new Customer
-            {
-                CustomerCode = "100",
-                CustomerName = "John Doe"
-            };
-            return View("Customer", obj);
-        }
-        public ActionResult Enter()
-        {
-            CustomerViewModel obj = new CustomerViewModel();
-            obj.customer = new Customer();
 
-            //CustomerDal dal = new CustomerDal();
-            //List<Customer> customerscoll  = dal.Customers.ToList<Customer>();
-            //obj.customers = customerscoll;
-            //Thread.Sleep(10000);
-            return View("EnterCustomer",obj);
-        }
-
-        public ActionResult EnterSearch()
+        public ActionResult EnterCustomer()
         {
-            CustomerViewModel obj = new CustomerViewModel();
-            obj.customers = new List<Customer>();
-            return View("SearchCustomer", obj);
+            return View();
+
         }
+        //public ActionResult Load()
+        //{
+        //    Customer obj = new Customer
+        //    {
+        //        CustomerCode = "100",
+        //        CustomerName = "John Doe"
+        //    };
+        //    return View("Customer", obj);
+        //}
+        //public ActionResult Enter()
+        //{
+        //    CustomerViewModel obj = new CustomerViewModel();
+        //    obj.customer = new Customer();
+
+        //    //CustomerDal dal = new CustomerDal();
+        //    //List<Customer> customerscoll  = dal.Customers.ToList<Customer>();
+        //    //obj.customers = customerscoll;
+        //    //Thread.Sleep(10000);
+        //    return View("EnterCustomer", obj);
+        //}
+
+        //public ActionResult EnterSearch()
+        //{
+        //    CustomerViewModel obj = new CustomerViewModel();
+        //    obj.customers = new List<Customer>();
+        //    return View("SearchCustomer", obj);
+        //}
 
         public ActionResult SearchCustomer()
         {
@@ -76,43 +82,43 @@ namespace HelloWorld.Controllers
             return View("SearchCustomer", obj);
         }
 
-        public ActionResult GetCustomers()
-        {
-            CustomerDal dal = new CustomerDal();
-            List<Customer> customerscoll = dal.Customers.ToList<Customer>();
-            //Thread.Sleep(10000);
-            return Json(customerscoll, JsonRequestBehavior.AllowGet);
-        }
-        [ActionName("GetCustomersByName")]
-        public ActionResult GetCustomers(Customer obj)
-        {
-            CustomerDal dal = new CustomerDal();
-            List<Customer> customerscoll = (from c in dal.Customers
-                                        where c.CustomerName == obj.CustomerName
-                                        select c).ToList<Customer>();
-            //Thread.Sleep(10000);
-            return Json(customerscoll, JsonRequestBehavior.AllowGet);
-        }
+        //public ActionResult GetCustomers()
+        //{
+        //    CustomerDal dal = new CustomerDal();
+        //    List<Customer> customerscoll = dal.Customers.ToList<Customer>();
+        //    //Thread.Sleep(10000);
+        //    return Json(customerscoll, JsonRequestBehavior.AllowGet);
+        //}
+        //[ActionName("GetCustomersByName")]
+        //public ActionResult GetCustomers(Customer obj)
+        //{
+        //    CustomerDal dal = new CustomerDal();
+        //    List<Customer> customerscoll = (from c in dal.Customers
+        //                                    where c.CustomerName == obj.CustomerName
+        //                                    select c).ToList<Customer>();
+        //    //Thread.Sleep(10000);
+        //    return Json(customerscoll, JsonRequestBehavior.AllowGet);
+        //}
 
-        [HttpPost]
-        public ActionResult Submit(Customer obj)
-        {
-           
+        //[HttpPost]
+        //public ActionResult Submit(Customer obj)
+        //{
 
-            if (ModelState.IsValid)
-            {
-                CustomerDal Dal = new CustomerDal();
-                Dal.Customers.Add(obj);
-                Dal.SaveChanges();
-               //vm.customer = new Customer();
-            }
-            
-            CustomerDal dal = new CustomerDal();
-            List<Customer> customerscoll = dal.Customers.ToList<Customer>();
-            
 
-            return Json(customerscoll, JsonRequestBehavior.AllowGet);
+        //    if (ModelState.IsValid)
+        //    {
+        //        CustomerDal Dal = new CustomerDal();
+        //        Dal.Customers.Add(obj);
+        //        Dal.SaveChanges();
+        //        //vm.customer = new Customer();
+        //    }
 
-        }
+        //    CustomerDal dal = new CustomerDal();
+        //    List<Customer> customerscoll = dal.Customers.ToList<Customer>();
+
+
+        //    return Json(customerscoll, JsonRequestBehavior.AllowGet);
+
+        //}
     }
 }
