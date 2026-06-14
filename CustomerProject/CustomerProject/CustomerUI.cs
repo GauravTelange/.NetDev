@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using BusinessLogicCustomer;
+
 using Dal;
 
 namespace CustomerProject
@@ -54,14 +54,15 @@ namespace CustomerProject
         {
             try
             {
-                Customer custobj = new Customer();
+                int id = Convert.ToInt32(txtCustomerid.Text);
+                Customer custobj = new Customer(id);
                 custobj.CustomerName = txtCustomerName.Text;
                 custobj.PhoneNumber = txtPhoneNumber.Text;
-                custobj.ProductName = txtProduct.Text;
+                custobj.ProductID = Convert.ToInt32(cmbProduct.SelectedValue);
                 custobj.BillAmount = Convert.ToDecimal(txtBillAmount.Text);
 
 
-                
+
                 if (custobj.Validate())
                 {
                     CustomerDal dal = new CustomerDal();
@@ -69,7 +70,7 @@ namespace CustomerProject
                 }
             }
 
-               
+
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
@@ -79,8 +80,16 @@ namespace CustomerProject
         private void loadGrid()
         {
             CustomerDal dal = new CustomerDal();
-            DataSet customers = dal.Read();
-            dataGridView1.DataSource = customers.Tables[0];
+            List<Customer> customers = dal.Read();
+            dataGridView1.DataSource = customers;
+        }
+
+        private void FillProduct()
+        {
+            CustomerDal dal = new CustomerDal();
+            cmbProduct.DisplayMember = "ProductName";
+            cmbProduct.ValueMember = "Productid";
+            cmbProduct.DataSource = dal.ReadProduct().Tables[0];
         }
 
         private void CustomerUI_Load_1(object sender, EventArgs e)
@@ -89,7 +98,7 @@ namespace CustomerProject
             button1.Text = ConfigurationManager.AppSettings["AddButton"].ToString();
             btnUpdate.Text = ConfigurationManager.AppSettings["UpdateButton"].ToString();
             btnDelete.Text = ConfigurationManager.AppSettings["DeleteButton"].ToString();
-
+            FillProduct();
             loadGrid();
         }
 
@@ -99,7 +108,7 @@ namespace CustomerProject
             txtCustomerid.Text = dataGridView1.Rows[rowselected].Cells[0].Value.ToString();
             txtCustomerName.Text = dataGridView1.Rows[rowselected].Cells[1].Value.ToString();
             txtPhoneNumber.Text = dataGridView1.Rows[rowselected].Cells[2].Value.ToString();
-            txtProduct.Text = dataGridView1.Rows[rowselected].Cells[3].Value.ToString();
+            cmbProduct.Text = dataGridView1.Rows[rowselected].Cells[3].Value.ToString();
             txtBillAmount.Text = dataGridView1.Rows[rowselected].Cells[4].Value.ToString();
 
         }
@@ -126,10 +135,11 @@ namespace CustomerProject
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            Customer updatedCust = new Customer();
+            int id = Convert.ToInt32(txtCustomerid.Text);
+            Customer updatedCust = new Customer(id);
             updatedCust.CustomerName = txtCustomerName.Text;
             updatedCust.PhoneNumber = txtPhoneNumber.Text;
-            updatedCust.ProductName = txtProduct.Text;
+            updatedCust.ProductID = Convert.ToInt32(cmbProduct.SelectedValue);
             updatedCust.BillAmount = Convert.ToDecimal(txtBillAmount.Text);
 
             CustomerDal dal = new CustomerDal();
@@ -145,7 +155,7 @@ namespace CustomerProject
         {
             txtCustomerName.Text = "";
             txtPhoneNumber.Text = "";
-            txtProduct.Text = "";
+            cmbProduct.SelectedIndex = -1;
             txtBillAmount.Text = ""; ;
         }
         private void btnDelete_Click(object sender, EventArgs e)
@@ -155,6 +165,16 @@ namespace CustomerProject
             dal.Delete(Customerid);
             MessageBox.Show("Customer deleted successfully.");
             loadGrid();
+
+        }
+
+        private void txtProduct_TextChanged_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblProduct_Click(object sender, EventArgs e)
+        {
 
         }
     }

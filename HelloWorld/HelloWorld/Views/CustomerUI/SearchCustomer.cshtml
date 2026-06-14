@@ -1,0 +1,50 @@
+﻿@model HelloWorld.ViewModel.CustomerViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<script src="~/Scripts/angular.min.js"></script>
+<script src="~/Scripts/Customer.js"></script>
+<script language="javascript">
+
+
+    var app = angular.module("myApp", []);
+
+    app.controller('CustomerViewModel', CustomerViewModel);
+
+</script>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+
+    <title>SearchCustomer</title>
+</head>
+<body ng-app="myApp">
+    <div ng-controller="CustomerViewModel">
+
+
+        Enter Customer Name :- <input ng-model="Customer.CustomerName" name="txtCustomerName" id="Text1" type="text" />
+        <br />
+        <input id="Submit1" type="button" value="Search Customer" ng-click="LoadByName()" />
+
+        <table>
+            <tr>
+                <th>Customer Code</th>
+                <th>Customer Name</th>
+                <th>Customer Amount</th>
+            </tr>
+
+            <tr ng-repeat="cust in Customers">
+                <td>{{cust.CustomerCode}}</td>
+                <td>{{cust.CustomerName}}</td>
+                <td style="background-color:{{ cust.CustomerAmountColor }}">{{cust.CustomerAmount}}</td>
+            </tr>
+
+        </table>
+    </div>
+    <br />
+
+</body>
+</html>

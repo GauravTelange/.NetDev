@@ -6,14 +6,16 @@ namespace BusinessLogicCustomer
         public int CustomerID { get; }
         public string CustomerName { get; set; }
         public string PhoneNumber { get; set; }
-        public string ProductName { get; set; }
+        public int ProductID  { get; set; }
         public decimal BillAmount { get; set; }
+        public string ProductName { get; set; }
+
 
         public Customer() {
             
             CustomerName = "";
             PhoneNumber = "";
-            ProductName = "";
+            ProductID = 0;
             BillAmount = 0;
 
         }
@@ -29,9 +31,9 @@ namespace BusinessLogicCustomer
                 throw new Exception("Phone Number is required");
             }
 
-            if (ProductName.Length == 0)
+            if (ProductID == 0)
             {
-                throw new Exception("Prouduct Name is required");
+                throw new Exception("Product ID is required");
             }
             if(BillAmount <= 0)
             {

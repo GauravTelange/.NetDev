@@ -82,7 +82,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BusinessLogicCustomer\BusinessLogicCustomer.csproj">
-      <Project>{c7a4f3fb-263a-4763-9b0a-3cc0865cd8c3}</Project>
+      <Project>{dfc997e8-e322-539d-2d20-c50eb1f9dc47}</Project>
       <Name>BusinessLogicCustomer</Name>
     </ProjectReference>
     <ProjectReference Include="..\dal\Dal.csproj">
