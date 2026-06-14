@@ -1,0 +1,23 @@
+﻿@model HelloWorld.ViewModel.CustomerViewModel
+
+@using HelloWorld.Models
+
+       <table>
+        <tr>
+            <th>Customer Code</th>
+            <th>Customer Name</th>
+            <th>Customer Amount</th>
+        </tr>
+       
+          <tr ng-repeat="cust in Customer">
+                <td>{{cust.CustomerCode}}</td>
+                <td>{{cust.CustomerName}}</td>
+                <td style="background-color:{{ cust .CustomerAmountColor }}">{{cust.CustomerAmount}}</td>
+            </tr>
+        
+    </table>
+
+
+
+
+
